@@ -14,6 +14,7 @@ export default new Router({
     },
     {
       path: '/desktop/:username',
+      name: 'desktop',
       component: Desktop
     }
   ]
