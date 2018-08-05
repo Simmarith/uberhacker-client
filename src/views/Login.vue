@@ -1,12 +1,12 @@
 <template>
-  <div class="home">
+  <div class="login">
+    Username:
+    <input v-model="username" />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'home',
-  components: {
-  }
+  name: 'login'
 }
 </script>
