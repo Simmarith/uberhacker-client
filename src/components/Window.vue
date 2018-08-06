@@ -20,7 +20,9 @@ export default {
   data: function () {
     return {
       draggedY: null,
-      draggedX: null
+      draggedX: null,
+      offsetY: null,
+      offsetX: null
     }
   },
   computed: {
@@ -48,11 +50,20 @@ export default {
       window.addEventListener('mousemove', this.move)
       this.$refs.window.addEventListener('mouseup', () => {
         window.removeEventListener('mousemove', this.move)
+        this.offsetY = null
+        this.offsetX = null
       })
     },
     move (e) {
-      this.draggedY = e.clientY
-      this.draggedX = e.clientX
+      if (!this.offsetY) {
+        this.offsetY = e.clientY - this.$refs.window.offsetTop
+      }
+      if (!this.offsetX) {
+        this.offsetX = e.clientX - this.$refs.window.offsetLeft
+      }
+      console.log(e)
+      this.draggedY = e.clientY - this.offsetY
+      this.draggedX = e.clientX - this.offsetX
     }
   }
 }
@@ -70,6 +81,10 @@ export default {
     .header {
       display: block;
       background-color: #0d0;
+      -webkit-user-select: none; /* Safari */
+      -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* IE10+/Edge */
+      user-select: none; /* Standard */
     }
   }
 </style>
