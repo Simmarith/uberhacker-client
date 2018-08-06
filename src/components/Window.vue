@@ -71,7 +71,8 @@ export default {
 
 <style scoped lang="less">
   .window {
-    background-color: rgba(0,0,0,.2);
+    background-color: rgba(0,0,0,.7);
+    filter: drop-shadow(0 0 4px rgba(255,255,255,.2));
     color: #fff;
     display: block;
     position: absolute;
