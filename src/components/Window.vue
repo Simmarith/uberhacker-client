@@ -1,5 +1,5 @@
 <template>
-  <div class="window">
+  <div class="window" :style="style">
     <div class="header">
       {{ header }}
     </div>
@@ -10,7 +10,31 @@
 <script>
 export default {
   name: 'Window',
-  props: ['header']
+  props: [
+    'header',
+    'height',
+    'width',
+    'top',
+    'left'
+  ],
+  computed: {
+    style () {
+      let style = ''
+      if (this.height) {
+        style += `height:${this.height};`
+      }
+      if (this.width) {
+        style += `width:${this.width};`
+      }
+      if (this.top) {
+        style += `top:${this.top};`
+      }
+      if (this.left) {
+        style += `left:${this.left};`
+      }
+      return style
+    }
+  }
 }
 </script>
 
