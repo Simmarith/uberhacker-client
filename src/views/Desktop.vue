@@ -25,7 +25,7 @@
 
 <script>
 import Window from '@/components/Window.vue'
-import Memes from '@/components/memes.vue'
+import Memes from '@/components/Memes.vue'
 
 export default {
   name: 'desktop',
