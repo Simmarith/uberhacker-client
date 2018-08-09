@@ -9,10 +9,16 @@
 
 <script>
 let windowCounter = 0
+let highestWindow = 1
 
 const getWindowId = () => {
   windowCounter++
   return `window-${windowCounter - 1}`
+}
+
+const getZIndex = () => {
+  highestWindow++
+  return highestWindow
 }
 
 export default {
@@ -26,6 +32,7 @@ export default {
   ],
   data: function () {
     return {
+      zIndex: 0,
       draggedY: null,
       draggedX: null,
       offsetY: null,
@@ -50,12 +57,16 @@ export default {
       if (this.left || this.draggedX) {
         style += `left:${this.currentLeft};`
       }
+      if (this.zIndex) {
+        style += `z-index:${this.zIndex};`
+      }
       return style
     }
   },
   methods: {
     drag () {
       window.addEventListener('mousemove', this.move)
+      this.zIndex = getZIndex()
       this.$refs[this.id].addEventListener('mouseup', this.stopMove)
     },
     move (e) {
@@ -72,7 +83,6 @@ export default {
       window.removeEventListener('mousemove', this.move)
       this.offsetY = null
       this.offsetX = null
-      window.removeEventListener('mouseup', this.stopMove)
     }
   }
 }
