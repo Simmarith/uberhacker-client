@@ -1,5 +1,5 @@
 <template>
-  <div ref="window" class="window" :style="style">
+  <div v-bind:ref="id" v-bind:id="id" class="window" :style="style">
     <div class="header" @mousedown="drag">
       {{ header }}
     </div>
@@ -8,6 +8,13 @@
 </template>
 
 <script>
+let windowCounter = 0
+
+const getWindowId = () => {
+  windowCounter++
+  return `window-${windowCounter - 1}`
+}
+
 export default {
   name: 'Window',
   props: [
@@ -22,7 +29,8 @@ export default {
       draggedY: null,
       draggedX: null,
       offsetY: null,
-      offsetX: null
+      offsetX: null,
+      id: getWindowId()
     }
   },
   computed: {
@@ -36,10 +44,10 @@ export default {
       if (this.width) {
         style += `width:${this.width};`
       }
-      if (this.top) {
+      if (this.top || this.draggedY) {
         style += `top:${this.currentTop};`
       }
-      if (this.left) {
+      if (this.left || this.draggedX) {
         style += `left:${this.currentLeft};`
       }
       return style
@@ -48,22 +56,23 @@ export default {
   methods: {
     drag () {
       window.addEventListener('mousemove', this.move)
-      this.$refs.window.addEventListener('mouseup', () => {
-        window.removeEventListener('mousemove', this.move)
-        this.offsetY = null
-        this.offsetX = null
-      })
+      this.$refs[this.id].addEventListener('mouseup', this.stopMove)
     },
     move (e) {
       if (!this.offsetY) {
-        this.offsetY = e.clientY - this.$refs.window.offsetTop
+        this.offsetY = e.clientY - this.$refs[this.id].offsetTop
       }
       if (!this.offsetX) {
-        this.offsetX = e.clientX - this.$refs.window.offsetLeft
+        this.offsetX = e.clientX - this.$refs[this.id].offsetLeft
       }
-      console.log(e)
       this.draggedY = e.clientY - this.offsetY
       this.draggedX = e.clientX - this.offsetX
+    },
+    stopMove () {
+      window.removeEventListener('mousemove', this.move)
+      this.offsetY = null
+      this.offsetX = null
+      window.removeEventListener('mouseup', this.stopMove)
     }
   }
 }
