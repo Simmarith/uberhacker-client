@@ -1,6 +1,7 @@
 <template>
   <Window
     v-bind:header="memeTitle"
+    randomPos={true}
   >
     <img
       v-bind:src="memeURL"

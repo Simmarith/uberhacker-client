@@ -28,7 +28,8 @@ export default {
     'height',
     'width',
     'top',
-    'left'
+    'left',
+    'randomPos'
   ],
   data: function () {
     return {
@@ -45,6 +46,7 @@ export default {
     currentLeft () { return this.draggedX ? this.draggedX + 'px' : this.left },
     style () {
       let style = ''
+      this.positionRandomly()
       if (this.height) {
         style += `height:${this.height};`
       }
@@ -83,6 +85,12 @@ export default {
       window.removeEventListener('mousemove', this.move)
       this.offsetY = null
       this.offsetX = null
+    },
+    positionRandomly () {
+      if (this.randomPos) {
+        this.top = Math.floor((Math.random() * 80)) + 'vh'
+        this.left = Math.floor((Math.random() * 80)) + 'vw'
+      }
     }
   }
 }
