@@ -32,10 +32,12 @@ export default {
     'randomPos'
   ],
   data: function () {
+    let randomPos = this.positionRandomly()
+    console.log(randomPos)
     return {
       zIndex: 0,
-      draggedY: null,
-      draggedX: null,
+      draggedY: randomPos[0],
+      draggedX: randomPos[1],
       offsetY: null,
       offsetX: null,
       id: getWindowId()
@@ -46,7 +48,6 @@ export default {
     currentLeft () { return this.draggedX ? this.draggedX + 'px' : this.left },
     style () {
       let style = ''
-      this.positionRandomly()
       if (this.height) {
         style += `height:${this.height};`
       }
@@ -87,10 +88,14 @@ export default {
       this.offsetX = null
     },
     positionRandomly () {
-      if (this.randomPos) {
-        this.top = Math.floor((Math.random() * 80)) + 'vh'
-        this.left = Math.floor((Math.random() * 80)) + 'vw'
+      console.log(this.randomPos)
+      let randomTop = null
+      let randomLeft = null
+      if (this.randomPos && !this.top && !this.left) {
+        randomTop = Math.floor((Math.random() * (document.getElementsByTagName('html')[0].clientHeight * 0.8)))
+        randomLeft = Math.floor((Math.random() * (document.getElementsByTagName('html')[0].clientWidth * 0.8)))
       }
+      return [randomTop, randomLeft]
     }
   }
 }
