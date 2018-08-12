@@ -26,9 +26,14 @@
 <script>
 import Window from '@/components/Window.vue'
 import Memes from '@/components/Memes.vue'
+import UserStore from '@/stores/UserStore'
 
 export default {
   name: 'desktop',
+  data: function () {
+    UserStore.init(this.$route.params.servername, this.$route.params.username)
+    return {}
+  },
   components: {
     Window,
     Memes

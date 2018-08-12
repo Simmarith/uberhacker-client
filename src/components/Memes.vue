@@ -21,7 +21,6 @@ let memeIndex = 0
 xhttp.onreadystatechange = function () {
   if (this.readyState === 4 && this.status === 200) {
     redditData = JSON.parse(this.responseText)
-    console.log(redditData)
   }
 }
 xhttp.open('GET', 'https://www.reddit.com/r/dankmemes/rising.json', false)

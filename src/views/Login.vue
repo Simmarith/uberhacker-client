@@ -7,6 +7,10 @@
     left="calc(50vw - 100px)"
   >
     <div class="login">
+      <span class="servername-label">Server:</span>
+      <br />
+      <input v-model="servername" />
+      <br />
       <span class="username-label">Username:</span>
       <input v-model="username" />
       <br />
@@ -24,7 +28,7 @@ export default {
   data: function () { return { username: '' } },
   methods: {
     login: function () {
-      this.$router.push({ name: 'desktop', params: { username: this.username } })
+      this.$router.push({ name: 'desktop', params: { username: this.username, servername: this.servername } })
     }
   }
 }

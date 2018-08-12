@@ -33,7 +33,6 @@ export default {
   ],
   data: function () {
     let randomPos = this.positionRandomly()
-    console.log(randomPos)
     return {
       zIndex: 0,
       draggedY: randomPos[0],
@@ -88,7 +87,6 @@ export default {
       this.offsetX = null
     },
     positionRandomly () {
-      console.log(this.randomPos)
       let randomTop = null
       let randomLeft = null
       if (this.randomPos && !this.top && !this.left) {
