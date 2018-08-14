@@ -69,7 +69,7 @@ export default {
     drag () {
       window.addEventListener('mousemove', this.move)
       this.zIndex = getZIndex()
-      this.$refs[this.id].addEventListener('mouseup', this.stopMove)
+      window.addEventListener('mouseup', this.stopMove)
     },
     move (e) {
       if (!this.offsetY) {
