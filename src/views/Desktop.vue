@@ -20,11 +20,13 @@ import Window from '@/components/Window'
 import Memes from '@/components/Memes'
 import UserStore from '@/stores/UserStore'
 import Users from '@/components/Users'
+import WebSocketHandler from '@/utils/WebSocket'
 
 export default {
   name: 'desktop',
   created: function () {
     UserStore.init(this.servername, this.$route.params.username)
+    WebSocketHandler.init(this.servername)
   },
   components: {
     Window,

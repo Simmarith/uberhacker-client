@@ -14,15 +14,18 @@
 
 <script>
 import Window from '@/components/Window'
-import UserStore from '@/stores/UserStore'
+import UserStore, { USERS_LIST_CHANGED } from '@/stores/UserStore'
 
 export default {
   name: 'Users',
   components: { Window },
-  computed: {
-    users () {
-      return UserStore.users
-    }
+  data: function () {
+    return { users: UserStore.users }
+  },
+  created: function () {
+    UserStore.addListener(USERS_LIST_CHANGED, (users) => {
+      this.users = users
+    })
   }
 }
 </script>
