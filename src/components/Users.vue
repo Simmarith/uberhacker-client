@@ -3,10 +3,8 @@
   header="USERS"
   top="0"
   left="0"
-  width="15vw"
-  height="10vh"
   >
-  <div :key="user.id" v-for="user in users">
+  <div class="user" :key="user.id" v-for="user in users">
     {{user.id}}: {{user.points}}pts
   </div>
   </Window>
@@ -26,6 +24,13 @@ export default {
     UserStore.addListener(USERS_LIST_CHANGED, (users) => {
       this.users = users
     })
+    UserStore.fetchUsers()
   }
 }
 </script>
+
+<style scoped lang="less">
+  .user {
+    padding: 5px;
+  }
+</style>

@@ -39,6 +39,16 @@ class UserStore extends EventEmitter {
       return user.id === id
     })
   }
+
+  fetchUsers () {
+    request
+      .get(`${this.baseURL}/users`)
+      .send()
+      .then((res) => {
+        this.users = res.body.users
+        this.emit(USERS_LIST_CHANGED, this.users)
+      })
+  }
 }
 
 export default new UserStore()
