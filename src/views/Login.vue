@@ -1,21 +1,21 @@
 <template>
-   <Window
-    header="LOGIN"
-    width="200px"
-    height="200px"
-    top="calc(50vh - 100px)"
-    left="calc(50vw - 100px)"
+  <Window
+  header="LOGIN"
+  width="200px"
+  height="200px"
+  top="calc(50vh - 100px)"
+  left="calc(50vw - 100px)"
   >
-    <div class="login">
-      <span class="servername-label">Server:</span>
-      <br />
-      <input v-model="servername" />
-      <br />
-      <span class="username-label">Username:</span>
-      <input v-model="username" />
-      <br />
-      <button class="login-submit" v-on:click="login">Login</button>
-    </div>
+  <div class="login">
+    <span class="servername-label">Server:</span>
+    <br />
+    <input v-model="servername" />
+    <br />
+    <span class="username-label">Username:</span>
+    <input v-model="username" />
+    <br />
+    <button class="login-submit" v-on:click="login">Login</button>
+  </div>
   </Window>
 </template>
 
@@ -28,26 +28,36 @@ export default {
   data: function () { return { username: '' } },
   methods: {
     login: function () {
-      this.$router.push({ name: 'desktop', params: { username: this.username, servername: this.servername } })
+      this.$router.push({ name: 'desktop', params: { username: this.username } })
+    }
+  },
+  computed: {
+    servername: {
+      set (value) {
+        localStorage.setItem('server', value)
+      },
+      get () {
+        return localStorage.getItem('server')
+      }
     }
   }
 }
 </script>
 
 <style scoped lang="less">
-  .login {
-    * {
-      margin: 5px;
-    }
-
-    .username-label {
-      display: block;
-    }
-
-    .login-submit {
-      position: absolute;
-      bottom: 0px;
-      right: 0px;
-    }
+.login {
+  * {
+    margin: 5px;
   }
+
+  .username-label {
+    display: block;
+  }
+
+  .login-submit {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+  }
+}
 </style>

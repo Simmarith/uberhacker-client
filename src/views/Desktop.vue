@@ -30,13 +30,17 @@ import UserStore from '@/stores/UserStore'
 
 export default {
   name: 'desktop',
-  data: function () {
-    UserStore.init(this.$route.params.servername, this.$route.params.username)
-    return {}
+  created: function () {
+    UserStore.init(this.servername, this.$route.params.username)
   },
   components: {
     Window,
     Memes
+  },
+  computed: {
+    servername () {
+      return localStorage.getItem('server')
+    }
   }
 }
 </script>
