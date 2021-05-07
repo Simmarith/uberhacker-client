@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "events": "^3.0.0",
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.21",
     "superagent": "^3.8.3",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1"
